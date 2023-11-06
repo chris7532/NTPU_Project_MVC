@@ -1,0 +1,152 @@
+﻿@model List<Pop3>
+
+
+<div class="card shadow border-0" style="margin-top:100px">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Data List</h2>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body p-4">
+
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th class="text-white">
+                        Time
+                    </th>
+                    <th class="text-white">
+                        IP
+                    </th>
+                    <th class="text-white">
+                        Hash
+                    </th>
+                    <th class="text-white">
+                        Country
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var obj in Model)
+                {
+                    <tr>
+                        <td class="text-white">
+                            @obj.Date?.ToString("yyyy/MM/dd") @obj.Time
+                        </td>
+                        <td class="text-white">
+                            @obj.Ip
+                        </td>
+                        <td class="text-white">
+                            @obj.Hash
+                        </td>
+                        <td class="text-white">
+                            @obj.Country
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div class="container mb-3" style="margin-top:100px">
+
+    <div class="box-header with-border">
+        <h3 class="box-title custom-heading text-center mb-3">FTP Graph</h3>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-lg-3 col-sm-6 pt-3 text-center">
+            <h5>Choose Time Span</h5>
+        </div>
+        <div class="col-lg-3 col-sm-6">
+            <label for="startDate">Start</label>
+            <input id="startDate" class="form-control" type="date" value="2019-07-15" />
+            <span id="startDateSelected" hidden></span>
+        </div>
+        <div class="col-lg-3 col-sm-6">
+            <label for="endDate">End</label>
+            <input id="endDate" class="form-control" type="date" value="2019-07-16" />
+            <span id="endDateSelected" hidden></span>
+        </div>
+        <div class="col-lg-3 col-sm-6 d-flex justify-content-left">
+            <button id="getDataButton" class="btn btn-primary">Submit</button>
+        </div>
+
+    </div>
+
+</div>
+
+<section class="col-md-12 col-md-push-0">
+    <div id="loading-spinner" class="d-flex justify-content-center pt-5 d-none">
+        <button class="btn btn-primary" type="button" disabled>
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Loading...
+        </button>
+    </div>
+    <table id="tblData" class="table table-bordered table-striped text-white py-5" style="width:100%">
+        <thead>
+            <tr>
+                <th class="text-white">
+                    Hash
+                </th>
+                <th class="text-white">
+                    Count
+                </th>
+            </tr>
+        </thead>
+    </table>
+    <partial name="_ViewGraphPartial" />
+</section>
+
+<div class="card shadow border-0" style="margin-top:100px">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Find By Hash</h2>
+
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <div class="row">
+            <div class="col-lg-3 col-sm-6">
+                <label for="hash">Input Hash</label>
+                <input id="hash" class="form-control" type="text" />          
+            </div>
+            <div class="col-lg-3 col-sm-6 d-flex justify-content-left">
+                <button id="getIpGroupButton" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+        <table id="tblData_hash" class="table table-bordered table-striped text-white py-5" style="width:100%">
+            <thead>
+                <tr>
+                    <th class="text-white">
+                        Date
+                    </th>
+                    <th class="text-white">
+                        Ip
+                    </th>
+                    <th class="text-white">
+                        Country
+                    </th>
+                    <th class="text-white">
+                        Count
+                    </th>
+                </tr>
+            </thead>
+        </table>
+        
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/chart_pop3.js"></script>
+    <script src="~/js/datePicker.js"></script>
+}
+

@@ -1,0 +1,98 @@
+﻿@model IEnumerable<FireWall>
+
+
+
+<div class="card shadow border-0" style="margin-top:100px">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Data List</h2>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body p-4">
+
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th class="text-white">
+                        Time
+                    </th>
+                    <th class="text-white">
+                        Fw
+                    </th>
+                    <th class="text-white">
+                        Src
+                    </th>
+                    <th class="text-white">
+                        Dst
+                    </th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var obj in Model)
+                {
+                    <tr>
+                        <td class="text-white">
+                            @obj.Time
+                        </td>
+                        <td class="text-white">
+                            @obj.Fw
+                        </td>
+                        <td class="text-white">
+                            @obj.Src
+                        </td>
+                        <td class="text-white">
+                            @obj.Dst
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="container mb-3" style="margin-top:100px">
+
+        <div class="box-header with-border">
+            <h3 class="box-title custom-heading text-center mb-3">FireWall Graph</h3>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-3 col-sm-6 pt-3 text-center">
+                <h5>Choose Time Span</h5>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <label for="startDate">Start</label>
+                <input id="startDate" class="form-control" type="date" value="2019-08-20" />
+                <span id="startDateSelected" hidden></span>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <label for="endDate">End</label>
+                <input id="endDate" class="form-control" type="date" value="2019-08-21" />
+                <span id="endDateSelected" hidden></span>
+            </div>
+            <div class="col-lg-3 col-sm-6 d-flex justify-content-left">
+                <button id="getDataButton" class="btn btn-primary">Submit</button>
+            </div>
+
+        </div>
+    
+</div>
+
+<section class="col-md-12 col-md-push-0">
+    <div id="loading-spinner" class="d-flex justify-content-center pt-5 d-none">
+    <button class="btn btn-primary" type="button" disabled>
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        Loading...
+    </button>
+    </div>
+    <partial name="_ViewGraphPartial"/>
+</section>
+
+@section Scripts{
+    <script src="~/js/chart_firewall.js</script>
+    <script src="~/js/datePicker.js"></script>
+}
